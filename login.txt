@@ -1,0 +1,53 @@
+app.post('/login', (req, res) => {
+    const username = req.body.username;
+
+    if (username) {
+        const query = 'SELECT * FROM usuarios WHERE username = ?';
+        
+        db.query(query, [username], (error, results) => {
+            if (error) {
+                console.error('Error en la consulta a la base de datos:', error);
+                res.redirect('/'); // Si hay error, redirigimos al inicio
+                return;
+            }
+
+            if (results.length > 0) {
+                const updateQuery = 'UPDATE usuarios SET conectado = TRUE WHERE username = ?';
+
+                db.query(updateQuery, [username], (err) => {
+                    if (err) {
+                        console.error('Error al actualizar el estado de conexión:', err);
+                        res.redirect('/');
+                        return;
+                    }
+
+                    // Añadir usuario a la lista de conectados
+                    if (!connectedUsers.includes(username)) {
+                        connectedUsers.push(username);
+                    }
+
+                    // Redirigir a /chat con el nombre de usuario como parámetro
+                    res.redirect(`/chat?username=${encodeURIComponent(username)}`);
+                });
+            } else {
+                const insertQuery = 'INSERT INTO usuarios (username, conectado) VALUES (?, TRUE)';
+
+                db.query(insertQuery, [username], (insertError) => {
+                    if (insertError) {
+                        console.error('Error al insertar el nuevo usuario:', insertError);
+                        res.redirect('/'); // Redirigimos al inicio si hay un error
+                        return;
+                    }
+
+                    // Añadir usuario a la lista de conectados
+                    connectedUsers.push(username);
+
+                    // Redirigir a /chat con el nombre de usuario como parámetro
+                    res.redirect(`/chat?username=${encodeURIComponent(username)}`);
+                });
+            }
+        });
+    } else {
+        res.redirect('/');
+    }
+});

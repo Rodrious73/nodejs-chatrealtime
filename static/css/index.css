@@ -1,0 +1,173 @@
+form {
+    all: unset;
+    display: block;
+    width: 100%;
+  }
+
+  form * {
+    all: revert;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+  }
+
+  section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+  }
+
+  .inputContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #username {
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 12px 15px;
+    color: black;
+    font-weight: 500;
+    outline: none;
+    caret-color: rgb(155, 78, 255);
+    transition-duration: 0.3s;
+    font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI,
+      Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .userIcon {
+    position: absolute;
+    fill: rgb(155, 78, 255);
+    width: 12px;
+    top: -23px;
+    left: -15px;
+    opacity: 0;
+    transition: 0.2s linear;
+  }
+
+  .usernameLabel {
+    position: absolute;
+    top: -25px;
+    left: 5px;
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI,
+      Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    transition: 0.2s linear;
+    opacity: 0;
+  }
+
+  #username:focus ~ .usernameLabel,
+  #username:valid ~ .usernameLabel {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+
+  #username:focus ~ .userIcon,
+  #username:valid ~ .userIcon {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+
+  #username:focus,
+  #username:valid {
+    background-color: #ddd;
+    transition-duration: 0.3s;
+  }
+
+  @media (max-width: 500px) {
+    section {
+      max-width: 100%;
+      padding: 15px;
+    }
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: rotateX(-10deg);
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px,
+      rgba(0, 0, 0, 0.4) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.3) 0px -3px 0px inset;
+  }
+
+  button:hover {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.2
+    ); 
+    font-size: 17px;
+    transform: scale(1.05) rotateY(20deg) rotateX(10deg);
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      inset 0px -3px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .info {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background: #d7f1fd;
+    border-radius: 8px;
+    border: 1px solid #509af8;
+    box-shadow: 0px 0px 5px -3px #111;
+  }
+
+  .info__icon {
+    width: 20px;
+    height: 20px;
+    transform: translateY(-2px);
+    margin-right: 8px;
+  }
+
+  .info__icon path {
+    fill: #509af8;
+  }
+
+  .info__title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #0c2a75;
+  }
+
+  .info__close {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .info__close path {
+    fill: #0c2a75;
+  }
